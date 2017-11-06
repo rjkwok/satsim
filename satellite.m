@@ -12,35 +12,35 @@ classdef satellite
         
         m   % mass of the cubesat in kg
         h   % height of orbit in km
-
+        
     end
 
     methods
 
-        function obj = satellite(mass, height)
+        function self = satellite(mass, height)
             % constructor
-            obj.m = mass;
-            obj.h = height;
+            self.m = mass;
+            self.h = height;
         end
 
-        function y = v(obj)
+        function y = v(self)
             % calculate orbital velocity in km/s
-            y = sqrt(obj.G*obj.M*obj.m/(obj.r_earth + obj.h));
+            y = sqrt(self.G*self.M*self.m/(self.r_earth + self.h));
         end
 
-        function y = angular_v(obj)
+        function y = angular_v(self)
             % calculate angular velocity in radians/s
-            y = obj.v/(obj.r_earth + obj.h);
+            y = self.v/(self.r_earth + self.h);
         end
         
-        function y = orbit_time(obj)
+        function y = orbit_time(self)
             % calculate the period (time per one orbit) in seconds
-            y = 2*pi/obj.angular_v;
+            y = 2*pi/self.angular_v;
         end
         
-        function y = eclipse_time(obj)
+        function y = eclipse_time(self)
             % calculat the time the satellite spends completely in shadow
-            y = 2*asin(obj.r_earth/(obj.r_earth + obj.h))/obj.angular_v;
+            y = 2*asin(self.r_earth/(self.r_earth + self.h))/self.angular_v;
         end
         
     end
