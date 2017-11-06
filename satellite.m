@@ -38,9 +38,14 @@ classdef satellite
             y = 2*pi/self.angular_v;
         end
         
+        function y = eclipse_angle(self)
+            % calcuate the angle from to which the satellite is in shadow
+            y = asin(self.r_earth/(self.r_earth + self.h));
+        end
+        
         function y = eclipse_time(self)
-            % calculat the time the satellite spends completely in shadow
-            y = 2*asin(self.r_earth/(self.r_earth + self.h))/self.angular_v;
+            % calculate the time the satellite spends completely in shadow
+            y = 2*self.eclipse_angle/self.angular_v;
         end
         
     end

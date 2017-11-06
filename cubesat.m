@@ -21,6 +21,15 @@ classdef cubesat < satellite
         
         function y = illuminated_area(self, angle)
             
+            eclipse_max = self.eclipse_angle;
+            eclipse_min = 2*pi - self.eclipse_angle;
+            
+            % if satellite is in the eclipse region, illumination is 0
+            if (angle < eclipse_max | angle > eclipse_min)
+                y = 0;
+                return
+            end
+            
             % a1 is the top surface facing away from earth
             a1 = self.x*self.y; 
             na = [-1; 0];
@@ -41,7 +50,7 @@ classdef cubesat < satellite
             y = max([1 0]*A*na,0)*a1 ...
               + max([1 0]*A*nb,0)*a2 ...
               + max([1 0]*A*nc,0)*a2;
-        
+
         end
         
     end
