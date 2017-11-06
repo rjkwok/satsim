@@ -18,7 +18,7 @@ for t = 0:dt:max_time
     x = [x; t];
     y = [y; sfusat.illuminated_area(angle)];
     
-    angle = angle + sfusat.angular_v*dt;
+    angle = mod(angle + sfusat.angular_v*dt, 2*pi);
     
 end
 
