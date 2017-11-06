@@ -30,12 +30,17 @@ classdef satellite
 
         function y = angular_v(obj)
             % calculate angular velocity in radians/s
-            y = obj.v()/(obj.r_earth + obj.h);
+            y = obj.v/(obj.r_earth + obj.h);
         end
         
-        function y = T(obj)
+        function y = orbit_time(obj)
             % calculate the period (time per one orbit) in seconds
-            y = 2*pi/obj.angular_v();
+            y = 2*pi/obj.angular_v;
+        end
+        
+        function y = eclipse_time(obj)
+            % calculat the time the satellite spends completely in shadow
+            y = 2*asin(obj.r_earth/(obj.r_earth + obj.h))/obj.angular_v;
         end
         
     end
